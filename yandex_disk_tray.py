@@ -52,6 +52,7 @@ class yandexDiskTray(QtGui.QSystemTrayIcon):
 
 		menu.aboutToShow.connect(self.updateMenuInfo)
 		menu.aboutToShow.connect(self.goTimer)
+		menu.aboutToHide.connect(self.stopTimer)
 
 		self.menu = menu
 
