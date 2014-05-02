@@ -7,8 +7,13 @@ from PyQt4 import QtGui, QtCore
 
 class yandexDiskTray(QtGui.QSystemTrayIcon):
 	yandexDisk = yandexDisk()
-	menuInfoItems = ["error","status", "progress", "size", "free"]
-	menuInfoText = {"error": u"Статус","status": u"Статус", "progress": u"Прогресс", "size": u"Всего", "free": u"Свободно"}
+	menuInfoItems = ["error","status", "progress", "size", "free","lastSynchronized"]
+	menuInfoText = {"error": u"Статус",
+					"status": u"Статус",
+					"progress": u"Прогресс",
+					"size": u"Всего",
+					"free": u"Свободно",
+					"lastSynchronized": u"Последние синхронизированные пути"}
 	menu = ''
 	timerId = ''
 
@@ -62,10 +67,20 @@ class yandexDiskTray(QtGui.QSystemTrayIcon):
 				text = self.menuInfoText[itemName]
 				text = text + ": "
 				method = getattr(self.yandexDisk, "get"+itemName.capitalize())
-				if(method() != False):
-					text = text + method()
-					action.setText(text)
-					action.setVisible(1)
+				result = method()
+
+				if(result != False):
+					if(itemName == "lastSynchronized"):					
+						subMenu = QtGui.QMenu()
+						for fileName in result:
+							subMenu.addAction(fileName)
+						action.setMenu(subMenu)
+						action.setEnabled(True)
+						action.setText(text)
+					else:
+						text = text + result
+						action.setText(text)
+						action.setVisible(1)
 				else:
 					action.setVisible(0)
 	

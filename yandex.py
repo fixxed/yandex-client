@@ -42,10 +42,10 @@ class yandexDisk:
 				self.propertiesDict[key] = value
 
 	def start(self):
-		return 1#commands.getoutput("yandex-disk start")
+		return commands.getoutput("yandex-disk start")
 	
 	def stop(self):
-		return 1#commands.getoutput("yandex-disk stop")
+		return commands.getoutput("yandex-disk stop")
 	
 	def getProperty(self, propertyName):
 		if propertyName in self.propertiesDict:
@@ -71,5 +71,5 @@ class yandexDisk:
 	def getFree(self):
 		return self.getProperty(u"Свободно")
 
-	def getLastSynchronized(self):
+	def getLastsynchronized(self):
 		return self.getProperty(u"Последние синхронизированные пути")
