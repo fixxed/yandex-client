@@ -19,8 +19,8 @@ class yandexDiskTray(QtGui.QSystemTrayIcon):
 
 		#Создаем меню
 		menu = QtGui.QMenu()
-		start = menu.addAction(u'Запустить')#, self.yandexDisk.start)
-		stop = menu.addAction(u'Остановить')#, self.yandexDisk.stop)
+		start = menu.addAction(u'Запустить', self.yandexDisk.start)
+		stop = menu.addAction(u'Остановить', self.yandexDisk.stop)
 		if(self.yandexDisk.status == 1):
 			start.setDisabled(True)
 		else:

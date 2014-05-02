@@ -70,3 +70,6 @@ class yandexDisk:
 
 	def getFree(self):
 		return self.getProperty(u"Свободно")
+
+	def getLastSynchronized(self):
+		return self.getProperty(u"Последние синхронизированные пути")
