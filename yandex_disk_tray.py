@@ -1,7 +1,7 @@
 # #!/usr/bin/python
 # -*- coding:utf-8 -*-
 
-import sys
+import os,sys
 from yandex import yandexDisk
 from PyQt4 import QtGui, QtCore
 
@@ -20,7 +20,9 @@ class yandexDiskTray(QtGui.QSystemTrayIcon):
 	def __init__(self, parent=None):
 		QtGui.QSystemTrayIcon.__init__(self, parent)
 
-		icon = QtGui.QIcon('ya.png')
+		path = os.path.dirname(os.path.abspath(__file__))
+
+		icon = QtGui.QIcon(path + '/ya.png')
 
 		#Создаем меню
 		menu = QtGui.QMenu()
@@ -50,9 +52,9 @@ class yandexDiskTray(QtGui.QSystemTrayIcon):
 		stop.triggered.connect(lambda: start.setEnabled(1))
 		stop.triggered.connect(lambda: stop.setDisabled(1))
 
-		menu.aboutToShow.connect(self.updateMenuInfo)
-		menu.aboutToShow.connect(self.goTimer)
 		menu.aboutToHide.connect(self.stopTimer)
+		menu.aboutToShow.connect(self.updateMenuInfo)
+		menu.aboutToShow.connect(self.goTimer)		
 
 		self.menu = menu
 
@@ -89,6 +91,7 @@ class yandexDiskTray(QtGui.QSystemTrayIcon):
 		self.timerId = self.startTimer(2000)
 
 	def stopTimer(self):
+		print "stop timer"
 		self.killTimer(self.timerId)
 
 	def timerEvent(self, event):
