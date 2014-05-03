@@ -73,3 +73,12 @@ class yandexDisk:
 
 	def getLastsynchronized(self):
 		return self.getProperty(u"Последние синхронизированные пути")
+
+	def getBasket(self):
+		return self.getProperty(u"Размер корзины")
+
+	def getUsed(self):
+		return self.getProperty(u"Занято")
+
+	def getPath(self):
+		return self.getProperty(u"Путь к папке Яндекс.Диска")
